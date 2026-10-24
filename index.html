@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Facto DH - Knowledge Hub</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b0b0b;color:#f5f5f5;font-family:Arial,sans-serif}
+header{padding:22px 16px;text-align:center;border-bottom:2px solid #ffd400}
+header h1{color:#ffd400;margin:0;font-size:34px}
+header p{color:#bbb}
+nav{padding:14px;text-align:center;background:#151515}
+nav a{color:#ffd400;margin:8px;text-decoration:none}
+.hero{padding:45px 20px;text-align:center}
+.hero h2{font-size:30px}
+.hero span{color:#ffd400}
+input{padding:13px;width:90%;max-width:500px;border:1px solid #ffd400;border-radius:8px;background:#181818;color:white}
+.container{max-width:950px;margin:auto;padding:15px}
+.filters{text-align:center;margin:15px 0}
+button{background:#ffd400;color:#111;border:0;border-radius:6px;padding:10px 14px;margin:5px;font-weight:bold}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:#171717;padding:20px;border:1px solid #333;border-radius:12px}
+.card h3{color:#ffd400}
+.more{display:none;color:#ccc;line-height:1.6}
+footer{text-align:center;padding:25px;color:#aaa;border-top:1px solid #333;margin-top:30px}
+</style>
+</head>
+<body>
+<header>
+<h1>FACTO DH</h1>
+<p>Discover Something New Every Day</p>
+</header>
+<nav>
+<a href="#home">Home</a>
+<a href="#facts">Daily Facts</a>
+<a href="#about">About</a>
+</nav>
+<section class="hero" id="home">
+<h2>Knowledge Is <span>Power</span></h2>
+<p>Daily GK, amazing science facts and useful knowledge.</p>
+<input id="search" type="search" placeholder="Search facts..." oninput="filterFacts()">
+</section>
+<main class="container" id="facts">
+<h2>🔥 Explore Facts</h2>
+<div class="filters">
+<button onclick="setCategory('All')">All</button>
+<button onclick="setCategory('GK')">GK</button>
+<button onclick="setCategory('Science')">Science</button>
+<button onclick="setCategory('Daily Life')">Daily Life</button>
+</div>
+<div class="grid" id="grid">
+<article class="card" data-category="Science">
+<h3>Why is the sky blue?</h3>
+<p>Sunlight contains many colours, but the atmosphere scatters blue light more strongly.</p>
+<p class="more">This scattering is called Rayleigh scattering. It makes the sky appear blue during the day.</p>
+<button onclick="toggleMore(this)">Read More</button>
+</article>
+<article class="card" data-category="GK">
+<h3>Largest planet</h3>
+<p>Jupiter is the largest planet in our Solar System.</p>
+<p class="more">Jupiter is a gas giant and has many moons.</p>
+<button onclick="toggleMore(this)">Read More</button>
+</article>
+<article class="card" data-category="Daily Life">
+<h3>Why do we yawn?</h3>
+<p>Yawning is a natural body action linked with tiredness and changes in alertness.</p>
+<p class="more">Scientists continue to study all the reasons why humans yawn.</p>
+<button onclick="toggleMore(this)">Read More</button>
+</article>
+<article class="card" data-category="Science">
+<h3>Plants make food</h3>
+<p>Green plants use sunlight, water and carbon dioxide to make food.</p>
+<p class="more">This process is called photosynthesis.</p>
+<button onclick="toggleMore(this)">Read More</button>
+</article>
+<article class="card" data-category="GK">
+<h3>Home of the world's tallest mountain</h3>
+<p>Mount Everest is in the Himalayas, on the Nepal–China border.</p>
+<p class="more">Its height is about 8,849 metres above sea level.</p>
+<button onclick="toggleMore(this)">Read More</button>
+</article>
+<article class="card" data-category="Daily Life">
+<h3>Save water</h3>
+<p>Small actions, like turning off the tap while brushing, can reduce water waste.</p>
+<p class="more">Saving water helps people, farms and ecosystems.</p>
+<button onclick="toggleMore(this)">Read More</button>
+</article>
+</div>
+</main>
+<section class="container" id="about">
+<h2>About Facto DH</h2>
+<p>Facto DH shares interesting facts, general knowledge and simple science explanations to help everyone learn something new.</p>
+</section>
+<footer>© 2026 Facto DH | Learn Something New Every Day</footer>
+<script>
+let category='All';
+function toggleMore(button){
+const more=button.previousElementSibling;
+const open=more.style.display==='block';
+more.style.display=open?'none':'block';
+button.textContent=open?'Read More':'Read Less';
+}
+function setCategory(value){category=value;filterFacts();}
+function filterFacts(){
+const query=document.getElementById('search').value.toLowerCase();
+document.querySelectorAll('.card').forEach(card=>{
+const matchesCategory=category==='All'||card.dataset.category===category;
+const matchesText=card.innerText.toLowerCase().includes(query);
+card.style.display=matchesCategory&&matchesText?'block':'none';
+});
+}
+</script>
+</body>
+  </html>
